@@ -10,5 +10,6 @@ public class Main {
         System.out.println(p.translated(10, 4));
         p.translate(-1, -3);
         System.out.println(p);
+        System.out.println(new Segment(new Point(0, 0), new Point(1, 1)).length());
     }
 }

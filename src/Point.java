@@ -1,5 +1,16 @@
 public class Point {
     public float x = 0, y = 0;
+    public Point() { }
+    public Point(Point p)
+    {
+        x = p.x;
+        y = p.y;
+    }
+    public Point(float x, float y)
+    {
+        this.x = x;
+        this.y = y;
+    }
     public String toString()
     {
         return String.format("{%.1f; %.1f}", x, y);
