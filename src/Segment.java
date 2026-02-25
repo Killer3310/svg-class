@@ -4,6 +4,7 @@ public class Segment {
     public Segment(Point a, Point b)
     {
         this.a = new Point(a);
+
         this.b = new Point(b);
     }
     public float length()
