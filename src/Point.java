@@ -7,10 +7,24 @@ public class Point {
     public String toSVG()
     {
         return String.format(
-                "<svg height=\"20\" width=\"20\">\n" +
-                "  <circle r=\"1\" cx=\"%s\" cy=\"%s\" fill=\"red\" />\n" +
-                "</svg> ",
+                """
+                        <svg height="20" width="20">
+                          <circle r="1" cx="%s" cy="%s" fill="red" />
+                        </svg>\s
+                """,
                 (String.valueOf(10 + x)).replace(',', '.'),
                 (String.valueOf(10 + y)).replace(',', '.'));
+    }
+    public void translate(float dx, float dy)
+    {
+        x += dx;
+        y += dy;
+    }
+    public Point translated(float dx, float dy)
+    {
+        Point ret = new Point();
+        ret.x = x + dx;
+        ret.y = y + dy;
+        return ret;
     }
 }
