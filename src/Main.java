@@ -6,6 +6,6 @@ public class Main {
         Point p = new Point();
         p.x = 1;
         p.y = 2;
-        System.out.println(p.toString());
+        System.out.println(p.toSVG());
     }
 }
