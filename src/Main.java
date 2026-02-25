@@ -11,5 +11,20 @@ public class Main {
         p.translate(-1, -3);
         System.out.println(p);
         System.out.println(new Segment(new Point(0, 0), new Point(1, 1)).length());
+
+        System.out.println(maxSegment(new Segment[] {
+                new Segment(new Point(0, 0), new Point(1, 1)),
+                new Segment(new Point(0, 0), new Point(3, 4))
+        }).length());
+    }
+    public static Segment maxSegment(Segment[] arr)
+    {
+        if (arr.length == 0) return null;
+        Segment mx = arr[0];
+        for (int i = 1; i < arr.length; i++)
+        {
+            if (mx.length() < arr[i].length()) mx = arr[i];
+        }
+        return mx;
     }
 }
