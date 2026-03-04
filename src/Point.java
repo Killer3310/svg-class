@@ -1,28 +1,28 @@
 public class Point {
-    public float x = 0, y = 0;
-    public Point() { }
+    private float x, y;
+    public Point() { x = 0; y = 0; }
     public Point(Point p)
     {
         x = p.x;
         y = p.y;
     }
-    public Point(float x, float y)
-    {
+    public float getX() { return x; }
+    public float getY() { return y; }
+    public void setX(float x) { this.x = x; }
+    public void setY(float y) { this.y = y; }
+    public void setXY(float x, float y) { this.x = x; this.y = y; }
+    public Point(float x, float y) {
         this.x = x;
         this.y = y;
     }
     public String toString()
     {
-        return String.format("{%.1f; %.1f}", x, y);
+        return String.valueOf(x).replace(',', '.') + "," + String.valueOf(y).replace(',', '.');
     }
     public String toSVG()
     {
         return String.format(
-                """
-                        <svg height="20" width="20">
-                          <circle r="1" cx="%s" cy="%s" fill="red" />
-                        </svg>\s
-                """,
+                "<circle r=\"1\" cx=\"%s\" cy=\"%s\" fill=\"red\" />",
                 (String.valueOf(10 + x)).replace(',', '.'),
                 (String.valueOf(10 + y)).replace(',', '.'));
     }

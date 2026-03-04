@@ -3,9 +3,7 @@
 public class Main {
     public static void main(String[] args) {
         System.out.print("Hello and welcome!\n");
-        Point p = new Point();
-        p.x = 1;
-        p.y = 2;
+        Point p = new Point(1, 2);
         System.out.println(p.toSVG());
         System.out.println(p.translated(10, 4));
         p.translate(-1, -3);
@@ -16,6 +14,8 @@ public class Main {
                 new Segment(new Point(0, 0), new Point(1, 1)),
                 new Segment(new Point(0, 0), new Point(3, 4))
         }).length());
+
+        System.out.println(new Polygon(new Point[] { new Point(-1, -1), new Point(1, 1), new Point(2, 0) }).toSVG());
     }
     public static Segment maxSegment(Segment[] arr)
     {
