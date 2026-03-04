@@ -7,4 +7,12 @@ public class SvgScene
         polygons[head++] = new Polygon(p);
         head %= 3;
     }
+    public String toSVG()
+    {
+        String out = "";
+        if (polygons[0] != null) out = polygons[0].toSVG();
+        if (polygons[1] != null) out += '\n' + polygons[1].toSVG();
+        if (polygons[2] != null) out += '\n' + polygons[2].toSVG();
+        return out;
+    }
 }

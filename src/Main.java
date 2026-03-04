@@ -15,7 +15,13 @@ public class Main {
                 new Segment(new Point(0, 0), new Point(3, 4))
         }).length());
 
-        System.out.println(new Polygon(new Point[] { new Point(-1, -1), new Point(1, 1), new Point(2, 0) }).toSVG());
+        Polygon pol = new Polygon(new Point[] { new Point(-1, -1), new Point(1, 1), new Point(2, 0) });
+        System.out.println(pol.toSVG());
+
+        SvgScene ss = new SvgScene();
+        ss.addPolygon(pol);
+        ss.addPolygon(pol);
+        System.out.println(ss.toSVG());
     }
     public static Segment maxSegment(Segment[] arr)
     {
