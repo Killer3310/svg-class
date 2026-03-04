@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
@@ -20,9 +22,22 @@ public class Main {
 
         SvgScene ss = new SvgScene();
         ss.addPolygon(pol);
-        ss.addPolygon(pol);
+        ss.addPolygon(new Polygon(new Point[] {
+                new Point(-2, 0),
+                new Point(0, 2),
+                new Point(0, -2),
+                new Point(4, 0)
+        }));
         System.out.println(ss.toSVG());
         System.out.println(ss.boundingBox());
+        try
+        {
+            ss.save("Test.svg");
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException(e);
+        }
     }
     public static Segment maxSegment(Segment[] arr)
     {
