@@ -11,6 +11,7 @@ public class Polygon
         points = new Point[p.points.length];
         for (int i = 0; i < points.length; i++) points[i] = new Point(p.points[i]);
     }
+    public Point[] getPoints() { return points; }
     public String toString()
     {
         String out = "{";

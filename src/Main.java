@@ -22,6 +22,7 @@ public class Main {
         ss.addPolygon(pol);
         ss.addPolygon(pol);
         System.out.println(ss.toSVG());
+        System.out.println(ss.boundingBox());
     }
     public static Segment maxSegment(Segment[] arr)
     {
