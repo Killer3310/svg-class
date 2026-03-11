@@ -1,9 +1,10 @@
 import java.io.IOException;
+import java.util.Locale;
 
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
+        Locale.setDefault(Locale.ENGLISH);
         System.out.print("Hello and welcome!\n");
         Point p = new Point(1, 2);
         System.out.println(p.toSVG());
@@ -17,7 +18,7 @@ public class Main {
                 new Segment(new Point(0, 0), new Point(3, 4))
         }).length());
 
-        Polygon pol = new Polygon(new Point[] { new Point(-1, -1), new Point(1, 1), new Point(2, 0) });
+        Polygon pol = new Polygon(new Point[] { new Point(-1, -1), new Point(1, 1), new Point(2, 0) }, null);
         System.out.println(pol.toSVG());
 
         SvgScene ss = new SvgScene();
@@ -27,7 +28,9 @@ public class Main {
                 new Point(0, 2),
                 new Point(0, -2),
                 new Point(4, 0)
-        }));
+            },
+            new Style("blue", "cyan", 0.02)
+        ));
         System.out.println(ss.toSVG());
         System.out.println(ss.boundingBox());
         try
@@ -38,6 +41,7 @@ public class Main {
         {
             throw new RuntimeException(e);
         }
+        System.out.println(new Style("red", "orange", 0.2).toSvg());
     }
     public static Segment maxSegment(Segment[] arr)
     {

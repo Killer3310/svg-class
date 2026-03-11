@@ -26,9 +26,8 @@ public class SvgScene
         for (int i = 0; i < len; i++)
         {
             arr = polygons[i].getPoints();
-            for (int j = 0; j < arr.length; j++)
-            {
-                float x = arr[j].getX(), y = arr[j].getY();
+            for (Point point : arr) {
+                float x = point.getX(), y = point.getY();
                 if (x < minX) minX = x;
                 if (x > maxX) maxX = x;
                 if (y < minY) minY = y;
@@ -39,17 +38,15 @@ public class SvgScene
     }
     public void save(String path) throws IOException {
         BoundingBox bb = boundingBox();
-        float extX = Math.max(-bb.minX, bb.maxX), extY = Math.max(-bb.minY, bb.maxY);
-        float ext = Math.max(extX, extY);
-        String out = String.format("<svg width=\"500\" height=\"500\" viewBox=\"%f %f %f %f\" xmlns=\"http://www.w3.org/2000/svg\">", -ext, -ext, ext * 2, ext * 2)
-                .replace(',', '.');
+        float ext = Math.max(Math.max(-bb.minX, bb.maxX), Math.max(-bb.minY, bb.maxY));
+        StringBuilder out = new StringBuilder(String.format("<svg width=\"1000\" height=\"1000\" viewBox=\"%f %f %f %f\" xmlns=\"http://www.w3.org/2000/svg\">", -ext, -ext, ext * 2, ext * 2)
+                .replace(',', '.'));
 
-        out += "\n<circle fill=\"aliceblue\" cx=\"0\" cy=\"0\" r=\"999\" />";
-        out += "\n<circle fill=\"red\" cx=\"0\" cy=\"0\" r=\"1\" />";
+        out.append("\n<circle fill=\"aliceblue\" cx=\"0\" cy=\"0\" r=\"999\" />");
         int len = polygons[2] == null ? head : 3;
         for (int i = 0; i < len; i++)
         {
-            out += '\n' + polygons[i].toSVG();
+            out.append('\n').append(polygons[i].toSVG());
         }
         FileWriter fw = new FileWriter(path, false);
         fw.write(out + "\n</svg>\n");
