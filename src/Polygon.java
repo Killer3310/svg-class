@@ -1,12 +1,22 @@
-public class Polygon
+public class Polygon extends Shape
 {
-    private final Point[] points;
-    private final Style style;
-    public Polygon(Point[] points, Style style)
+    public static Polygon square(Segment s, Style style)
     {
-        this.style = style;
+        Segment perp = s.perpendicular();
+        Point[] points = new Point[] { s.getA(), perp.getA(), s.getB(), perp.getB() };
+        return new Polygon(points, style);
+    }
+    private final Point[] points;
+    public Polygon(Point[] points)
+    {
+        super();
         this.points = new Point[points.length];
         for (int i = 0; i < points.length; i++) this.points[i] = new Point(points[i]);
+    }
+    public Polygon(Point[] points, Style style)
+    {
+        this(points);
+        this.style = style;
     }
     public Polygon(Polygon p)
     {
@@ -25,7 +35,7 @@ public class Polygon
         }
         return out + "}";
     }
-    public String toSVG()
+    public String toSvg()
     {
         StringBuilder out = new StringBuilder("<polygon points=\"");
         for (int i = 0; i < points.length; i++)

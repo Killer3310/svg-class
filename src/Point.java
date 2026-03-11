@@ -17,7 +17,7 @@ public class Point {
     }
     public String toString()
     {
-        return String.valueOf(x).replace(',', '.') + "," + String.valueOf(y).replace(',', '.');
+        return String.valueOf(x) + "," + String.valueOf(-y);
     }
     public String toSVG()
     {
@@ -26,16 +26,56 @@ public class Point {
                 (String.valueOf(10 + x)).replace(',', '.'),
                 (String.valueOf(10 + y)).replace(',', '.'));
     }
+    public void translate(Point p)
+    {
+        x += p.x;
+        y += p.y;
+    }
     public void translate(float dx, float dy)
     {
         x += dx;
         y += dy;
+    }
+    public Point translated(Point p)
+    {
+        return new Point(x + p.x, y + p.y);
     }
     public Point translated(float dx, float dy)
     {
         Point ret = new Point();
         ret.x = x + dx;
         ret.y = y + dy;
+        return ret;
+    }
+    public void rotate90()
+    {
+        float t = x;
+        x = -y;
+        y = t;
+    }
+    public void rotateC90()
+    {
+        float t = x;
+        x = y;
+        y = -x;
+    }
+    public Point negated()
+    {
+        return new Point(-x, -y);
+    }
+    public void mul(float f)
+    {
+        x *= f;
+        y *= f;
+    }
+    public Point muld(float f)
+    {
+        return new Point(x * f, y * f);
+    }
+    public Point vecTo(Point other)
+    {
+        Point ret = this.negated();
+        ret.translate(other);
         return ret;
     }
 }

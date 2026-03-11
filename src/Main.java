@@ -18,8 +18,8 @@ public class Main {
                 new Segment(new Point(0, 0), new Point(3, 4))
         }).length());
 
-        Polygon pol = new Polygon(new Point[] { new Point(-1, -1), new Point(1, 1), new Point(2, 0) }, null);
-        System.out.println(pol.toSVG());
+        Polygon pol = new Polygon(new Point[] { new Point(-1, -1), new Point(1, 1), new Point(2, 0) });
+        System.out.println(pol.toSvg());
 
         SvgScene ss = new SvgScene();
         ss.addPolygon(pol);
@@ -31,6 +31,10 @@ public class Main {
             },
             new Style("blue", "cyan", 0.02)
         ));
+        ss.addPolygon(
+                Polygon.square(new Segment(new Point(-1, 1), new Point(-2, 3)),
+                new Style("#7FFF7F", "#FFFF7F", 0.1))
+        );
         System.out.println(ss.toSVG());
         System.out.println(ss.boundingBox());
         try
