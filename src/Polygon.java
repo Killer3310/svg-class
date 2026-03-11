@@ -48,4 +48,16 @@ public class Polygon extends Shape
         else out.append("style=\"fill:#FF00FF00;stroke-width:1;stroke:black\" ");
         return out.append("/>").toString();
     }
+    public BoundingBox getBounds()
+    {
+        float minX = points[0].getX(), maxX = minX, minY = points[0].getY(), maxY = minY;
+        for (Point point : points) {
+            float x = point.getX(), y = point.getY();
+            if (x < minX) minX = x;
+            if (x > maxX) maxX = x;
+            if (y < minY) minY = y;
+            if (y > maxY) maxY = y;
+        }
+        return new BoundingBox(minX, maxX, minY, maxY);
+    }
 }

@@ -32,7 +32,7 @@ public class Main {
             new Style("blue", "cyan", 0.02)
         ));
         ss.addPolygon(
-                Polygon.square(new Segment(new Point(-1, 1), new Point(-2, 3)),
+                Polygon.square(new Segment(new Point(-1, 1), new Point(-2, 4)),
                 new Style("#7FFF7F", "#FFFF7F", 0.1))
         );
         System.out.println(ss.toSVG());

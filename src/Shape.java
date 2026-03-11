@@ -10,4 +10,5 @@ public abstract class Shape
         this.style = style;
     }
     public abstract String toSvg();
+    public abstract BoundingBox getBounds();
 }
