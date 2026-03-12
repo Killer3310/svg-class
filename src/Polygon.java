@@ -49,15 +49,23 @@ public class Polygon extends Shape
         return out.append("/>").toString();
     }
     public BoundingBox getBounds()
-    {
-        float minX = points[0].getX(), maxX = minX, minY = points[0].getY(), maxY = minY;
-        for (Point point : points) {
-            float x = point.getX(), y = point.getY();
-            if (x < minX) minX = x;
-            if (x > maxX) maxX = x;
-            if (y < minY) minY = y;
-            if (y > maxY) maxY = y;
-        }
-        return new BoundingBox(minX, maxX, minY, maxY);
-    }
+	{
+		float minX = points[0].getX(), maxX = minX, minY = points[0].getY(), maxY = minY;
+		for (Point point : points) {
+			float x = point.getX(), y = point.getY();
+			if (x < minX)
+				minX = x;
+			if (x > maxX)
+				maxX = x;
+			if (y < minY)
+				minY = y;
+			if (y > maxY)
+				maxY = y;
+		}
+		return new BoundingBox(minX, maxX, minY, maxY);
+	}
+	public Polygon copy()
+	{
+		return new Polygon(this);
+	}
 }

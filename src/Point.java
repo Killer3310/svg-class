@@ -1,8 +1,10 @@
-public class Point {
+public class Point extends Shape
+{
     private float x, y;
     public Point() { x = 0; y = 0; }
     public Point(Point p)
-    {
+	{
+		style = new Style("red", "red", 0);
         x = p.x;
         y = p.y;
     }
@@ -19,13 +21,21 @@ public class Point {
     {
         return String.valueOf(x) + "," + String.valueOf(-y);
     }
-    public String toSVG()
-    {
-        return String.format(
-                "<circle r=\"1\" cx=\"%s\" cy=\"%s\" fill=\"red\" />",
-                (String.valueOf(10 + x)).replace(',', '.'),
-                (String.valueOf(10 + y)).replace(',', '.'));
-    }
+    public String toSvg()
+	{
+		return String.format(
+				"<circle r=\"0.05\" cx=\"%f\" cy=\"%f\" %s />",
+				x, -y, style.toSvg());
+	}
+
+	public BoundingBox getBounds()
+	{
+		return new BoundingBox(x, y, x, y);
+	}
+	public Point copy()
+	{
+		return new Point(this);
+	}
     public void translate(Point p)
     {
         x += p.x;
@@ -57,7 +67,7 @@ public class Point {
     {
         float t = x;
         x = y;
-        y = -x;
+        y = -t;
     }
     public Point negated()
     {
