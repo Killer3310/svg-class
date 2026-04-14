@@ -1,19 +1,10 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.util.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Scanner;
-import java.util.Set;
 
-public class Person implements Comparable<Person>
+public class Person implements Comparable<Person>, Serializable
 {
     private String firstName, lastName;
     private LocalDate birthDate, deathDate;
@@ -114,16 +105,39 @@ public class Person implements Comparable<Person>
     }
 	public void safeAdopt(Person p)
 	{
-		try
+		try 
 		{
 			adopt(p);
-		}
-		catch (ParentingAgeException e)
+		} 
+		catch (ParentingAgeException e) 
 		{
 			System.out.print("Parent too young, adopt anyway? [y/n]");
 			Scanner s = new Scanner(System.in);
 			if (s.nextLine().contentEquals("y"))
 				children.add(p);
 		}
+	}
+	public static void toBinaryFile(List<Person> ppl, String path) throws FileNotFoundException, IOException
+	{
+		FileOutputStream file = new FileOutputStream(path);
+		ObjectOutputStream out = new ObjectOutputStream(file);
+		out.writeObject(ppl);
+		out.close();
+		file.close();
+	}
+	public static List<Person> fromBinaryFile(String path) throws 
+		FileNotFoundException, IOException,
+		ClassNotFoundException, InvalidClassException,
+		OptionalDataException, StreamCorruptedException
+	{
+		FileInputStream file = new FileInputStream(path);
+		ObjectInputStream in = new ObjectInputStream(file);
+		List<Person> ret = null;
+		
+		ret = (List<Person>) in.readObject();
+		
+		in.close();
+		file.close();
+		return ret;
 	}
 }

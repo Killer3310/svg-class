@@ -1,12 +1,9 @@
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.util.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Main
 {
-    public static void main(String[] args) throws NegativeLifespanException, ParentingAgeException, IOException, FileNotFoundException, AmbiguousPersonException
+    public static void main(String[] args) throws Exception
     {
         // Person[] people = new Person[10];
         List<Person> people2 = new ArrayList<>(List.of(
@@ -26,6 +23,10 @@ public class Main
         System.out.println(f.get("Wawa1 Pluh"));
         System.out.println(people2.get(0).getYoungestChild());
 
-        System.out.println(Person.fromCsv("family.csv"));
+		List<Person> ppl = Person.fromCsv("family.csv");
+		System.out.println(ppl);
+		
+		Person.toBinaryFile(ppl, "test.ppl");
+		System.out.println("\n\n" + Person.fromBinaryFile("test.ppl"));
     }
 }
