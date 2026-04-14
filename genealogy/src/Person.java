@@ -3,7 +3,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -11,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Scanner;
 import java.util.Set;
 
 public class Person implements Comparable<Person>
@@ -91,27 +91,39 @@ public class Person implements Comparable<Person>
         }
         for (int i = 0; i < lines.length; i++)
         {
-            String[] s = lines[i].split(",");
+			String[] s = lines[i].split(",");
+			if (s.length < 4)
+				continue;
             for (int j = 0; j < lines.length; j++)
             {
-                if (i == j) continue;
-                if (ret.get(j).getName() == s[0])
-                {
-                    try
-                    {
-                        ret.get(i).adopt(ret.get(j));
-                    }
-                    catch (ParentingAgeException e)
-                    {
-						System.out.println("Parent too young, continue anyway? [y/n]");
-						if (new BufferedReader(new InputStreamReader(System.in)).readLine().toLowerCase() != "y")
-							continue;
-						ret.get(i).children.add(ret.get(j));
-                    }
-                }
+				if (i == j)
+					continue;
+                if (ret.get(j).getName().contentEquals(s[3]))
+				{
+					ret.get(i).safeAdopt(ret.get(j));
+				}
+				if (s.length > 4 && ret.get(j).getName().contentEquals(s[4]))
+				{
+					ret.get(i).safeAdopt(ret.get(j));
+				}
+	
             }
         }
         br.close();
         return ret;
     }
+	public void safeAdopt(Person p)
+	{
+		try
+		{
+			adopt(p);
+		}
+		catch (ParentingAgeException e)
+		{
+			System.out.print("Parent too young, adopt anyway? [y/n]");
+			Scanner s = new Scanner(System.in);
+			if (s.nextLine().contentEquals("y"))
+				children.add(p);
+		}
+	}
 }
